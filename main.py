@@ -6,18 +6,18 @@ def main():
     last = None
     while True:
         if last:
-            print(f"The last testing result is : {last}")
+            print(f"The last testing result is : {last['mbti']}")
         else:
             print(f"Please start the test!")
-        command = input("Do you want to start the test? Yes|No|result: ")
-        if command == "No":
+        command = input("Do you want to start the test? Yes|No|Result: ").strip().lower()
+        if command == "no":
             break
         elif command == "result":
             if last:
-                print(f"The last testing result is : {last}")
+                print(f"The last testing result is : {last['mbti']}")
             else:
                 print(f"Please start the test!")
-        elif command == "Yes":
+        elif command == "yes":
             questions = create_question()
             answer = []
             for i, question in enumerate(questions, 1):
@@ -27,9 +27,11 @@ def main():
 
             score_dict = calculate_score(questions, answer)
             result = mbti(score_dict)
-
             print(f"Your MBTI is : {result}!")
-            last = {result}
+            last = {"mbti": result}
+        else:
+            print("Sorry! This command is not recognized!")
+            
     
 if __name__ == "__main__":
     main()
