@@ -1,17 +1,20 @@
 from question import personality_type
 def print_question(question, index):
-    print(f"\nThe {index} question: {question['q']}")
+    print(f"\n{question['q']}")
     for i, answer_option in enumerate(question["answer"], 1):
         text = answer_option[0]
         print(f"{i}. {text}")
 
 def ask_question(question):
     while True:
-        score = int(input("Your choice is: "))
-        if 1 <= score <= 5:
-            return question["answer"][score - 1][1]
-        else:
-            print("Wrong answer!")
+        try:
+            score = int(input("Your choice is: "))
+            if 1 <= score <= 5:
+                return question["answer"][score - 1][1]
+            else:
+                print("Wrong answer!")
+        except ValueError:
+            print("Please enter a valid number here!")
 
 def calculate_score(questions, answer):
     score_dict = {}
